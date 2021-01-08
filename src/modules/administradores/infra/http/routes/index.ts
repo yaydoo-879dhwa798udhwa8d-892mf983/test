@@ -3,11 +3,17 @@ import Koa from "Koa";
 
 const admin_router = new Router();
 
-const omega = async (ctx: Koa.Context, next: Koa.Next) => {
-    ctx.body = "Hello Tessa World! ";
-};
+import { accessProtected } from "../../../../../infra/http/auth";
+import { loginAdministradorController } from "../../../useCases/loginAdministrador";
+import { getProductosController } from "../../../useCases/getProductos";
 
-admin_router.post("/administradores/login", omega);
-admin_router.get("/administradores/productos", omega);
+admin_router.get(
+    "/administradores/productos",
+    accessProtected,
+    getProductosController
+);
+admin_router.post("/administradores/login", async (ctx) => {
+    await loginAdministradorController.execute(ctx);
+});
 
 export { admin_router };

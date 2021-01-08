@@ -25,8 +25,8 @@ export class JWT {
         );
     }
     public static async encode(
-        ctx: Koa.Context,
-        payload: JwtPayload
+        ctx?: Koa.Context,
+        payload?: JwtPayload
     ): Promise<string> {
         const cert = await this.readPrivateKey();
         if (!cert) ApiError.handle(new InternalError(), ctx);
@@ -58,11 +58,13 @@ export class JWT {
     public static async decode(ctx, token: string): Promise<JwtPayload> {
         const cert = await this.readPublicKey();
         try {
+            console.log(token);
             // @ts-ignore
             return (await promisify(verify)(token, cert, {
                 ignoreExpiration: true,
             })) as JwtPayload;
         } catch (e) {
+            console.log(e);
             ApiError.handle(new BadTokenError(), ctx);
         }
     }

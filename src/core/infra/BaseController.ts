@@ -1,4 +1,11 @@
 import Koa from "koa";
+class ServerError extends Error {
+    public statusCode: number;
+    constructor(statusCode, message) {
+        super(message);
+        this.statusCode = statusCode;
+    }
+}
 
 /**
  * Base controller
@@ -26,8 +33,8 @@ export abstract class BaseController {
         }
         return ctx.toJSON();
     }
-    public notOk<T>(code: number, message) {
-        this.ctx.throw(code, message);
+    public notOk(code: number, message: string) {
+        throw new ServerError(code, message);
     }
     public created(message?: string): any {
         return this.jsonResponse(201, message ? message : "Created");

@@ -1,13 +1,13 @@
 import { BaseController } from "../../../../core/infra/BaseController";
-import { CreateVendedorUseCase } from "./CreateVendedorUseCase";
-import { CreateVendedorDTO } from "./CreateVendedorDTO";
-import { CreateVendedorErrors } from "./CreateVendedorErrors";
+import { LoginVendedorUseCase } from "./LoginVendedorUseCase";
+import { LoginVendedorDTO } from "./LoginVendedorDTO";
+import { LoginVendedorErrors } from "./LoginVendedorErrors";
 import * as yup from "yup";
 
-export class CreateVendedorController extends BaseController {
-    private useCase: CreateVendedorUseCase;
+export class LoginVendedorController extends BaseController {
+    private useCase: LoginVendedorUseCase;
 
-    constructor(useCase: CreateVendedorUseCase) {
+    constructor(useCase: LoginVendedorUseCase) {
         super();
         this.useCase = useCase;
     }
@@ -27,6 +27,10 @@ export class CreateVendedorController extends BaseController {
 
     async validateBody(js: {}) {
         let result;
+        console.log(Object.keys(js).length);
+        if (Object.keys(js).length == 0) {
+            this.unEntity("Fields required");
+        }
         if (!js["email"]) {
             this.unEntity("Field 'email' required");
         }
@@ -37,23 +41,18 @@ export class CreateVendedorController extends BaseController {
         if (!result) {
             this.unEntity("Invalid email format");
         }
-        result = await this.validatePassword(js["password"]);
-
-        if (!result) {
-            this.unEntity("Password is too short - should be 8 chars minimum.");
-        }
     }
 
     async executeTEMP(): Promise<any> {
         await this.validateBody(this.ctx.request.body);
-        const dto: CreateVendedorDTO = this.ctx.request
-            .body as CreateVendedorDTO;
+        const dto: LoginVendedorDTO = this.ctx.request.body as LoginVendedorDTO;
         try {
             const result = await this.useCase.execute(dto);
+            const aux = result;
             if (result.isLeft()) {
                 const error = result.value;
                 switch (error.constructor) {
-                    case CreateVendedorErrors.AccountAlreadyExists:
+                    case LoginVendedorErrors.AccountDoesntExists:
                         this.conflict(error.errorValue().message);
 
                         break;
@@ -62,7 +61,8 @@ export class CreateVendedorController extends BaseController {
                         break;
                 }
             } else {
-                this.created();
+                console.log(aux.value);
+                this.ok(this.ctx, { data: aux.value.getValue() });
             }
         } catch (err) {
             this.fail(err);

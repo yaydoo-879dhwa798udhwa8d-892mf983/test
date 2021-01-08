@@ -19,6 +19,7 @@ enum ErrorType {
     NO_DATA = "NoDataError",
     BAD_REQUEST = "BadRequestError",
     FORBIDDEN = "ForbiddenError",
+    NO_HEADERS = "NoHeadersError",
 }
 enum ErrorMsg {
     UNAUTHORIZED = "Invalid Credentials",
@@ -31,6 +32,7 @@ enum ErrorMsg {
     TOKEN_EXPIRED = "Token is expired",
     NO_DATA = "No data available",
     ACCESS_TOKEN = "Invalid access token",
+    NO_HEADERS = "No headers",
 }
 
 export abstract class ApiError extends Error {
@@ -66,6 +68,11 @@ export abstract class ApiError extends Error {
                 return new InternalErrorResponse(message).send(res);
             }
         }
+    }
+}
+export class NoHeadersError extends ApiError {
+    constructor(message = <string>ErrorMsg.NO_HEADERS) {
+        super(ErrorType.NO_HEADERS, message);
     }
 }
 export class TokenExpiredError extends ApiError {

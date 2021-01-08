@@ -1,4 +1,10 @@
+import { Console } from "console";
 import Knex from "knex";
+
+import { Producto } from "../domain/productos/producto";
+
+import { ProductoSku } from "../domain/productos/productoSku";
+import { ProductoMap } from "../mappers/ProductoMap";
 
 interface IProducto {
     id: string;
@@ -53,5 +59,37 @@ export class ProductosRepo {
             .offset(offset)
             .limit(limit)) as IProducto[];
         return productos;
+    }
+    public async exists(sku: ProductoSku): Promise<boolean> {
+        const productoExist = await this.getProductosWithParams({
+            sku: sku.value,
+        });
+        return productoExist.length > 1 ? true : false;
+    }
+    async setProducto(producto: IProducto): Promise<IProducto> {
+        const seller: IProducto = await this.knexInstance<IProducto>(
+            "productos"
+        ).insert({
+            id: producto.id,
+            nombre: producto.nombre,
+            sku: producto.sku,
+            cantidad: producto.cantidad,
+            precio: producto.precio,
+            vendedor: producto.vendedor,
+        });
+        return seller;
+    }
+    public async save(producto: Producto): Promise<void> {
+        const exists = await this.exists(producto.sku);
+        const rawProducto = ProductoMap.toPersistence(producto);
+        try {
+            if (!exists) {
+                await this.setProducto(rawProducto);
+            } else {
+                //En caso de que exista, modificar!
+            }
+        } catch (r) {
+            console.log(r);
+        }
     }
 }

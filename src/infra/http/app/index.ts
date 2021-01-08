@@ -15,7 +15,21 @@ var accessLogStream = fs.createWriteStream(
         flags: "a",
     }
 );
+const errHandler = async (ctx, next) => {
+    return next().catch((err) => {
+        const { statusCode, message } = err;
 
+        ctx.type = "json";
+        ctx.status = statusCode || 500;
+        ctx.body = {
+            status: "error",
+            message,
+        };
+
+        ctx.app.emit("error", err, ctx);
+    });
+};
+app.use(errHandler);
 app.use(respond());
 app.use(morgan("combined", { stream: accessLogStream }));
 

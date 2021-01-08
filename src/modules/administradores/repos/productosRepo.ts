@@ -29,6 +29,7 @@ export class ProductosRepo {
         offset: number = 0,
         limit: number = 5
     ): Promise<IProducto[]> {
+        console.log(params)
         const productos: IProducto[] = (await this.knexInstance<IProducto>(
             "productos"
         )

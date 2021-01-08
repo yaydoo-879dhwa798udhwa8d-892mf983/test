@@ -2,6 +2,7 @@ import Knex from "knex";
 import { Vendedor } from "../domain/vendedores/vendedor";
 
 import { VendedorEmail } from "../domain/vendedores/vendedorEmail";
+import { VendedorPassword } from "../domain/vendedores/vendedorPassword";
 import { VendedorMap } from "../mappers/VendedorMap";
 
 export interface IVendedor {
@@ -29,6 +30,18 @@ export class VendedoresRepo {
         )
             .select("id", "email", "password")
             .where("email", email.value.toString())) as Vendedor[])[0];
+        return vendedor;
+    }
+    public async getVendedorByEmailAndPassword(
+        email: VendedorEmail,
+        password: VendedorPassword
+    ): Promise<Vendedor> {
+        const vendedor: Vendedor = ((await this.knexInstance<Vendedor>(
+            "vendedores"
+        )
+            .select("id", "email", "password")
+            .where("email", email.value.toString())
+            .andWhere("password", password.value.toString())) as Vendedor[])[0];
         return vendedor;
     }
     public async exists(email: VendedorEmail): Promise<boolean> {

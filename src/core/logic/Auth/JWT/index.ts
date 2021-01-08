@@ -43,7 +43,7 @@ declare interface Tokens {
 export const createTokens = async (
     user: User,
     accessTokenKey: string,
-    ctx: Koa.Context
+    ctx?: Koa.Context
 ): Promise<Tokens> => {
     const accessToken = await JWT.encode(
         ctx,
