@@ -3,7 +3,9 @@ import bodyParser = require("koa-bodyparser");
 import morgan from "koa-morgan";
 import fs from "fs";
 var path = require("path");
-const respond = require('koa-respond');
+const respond = require("koa-respond");
+
+import "../../../modules/administradores/repos/index";
 
 const app = new Koa();
 

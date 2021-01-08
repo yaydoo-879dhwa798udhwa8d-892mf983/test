@@ -1,6 +1,6 @@
 import Knex from "knex";
 
-export interface IProducto {
+interface IProducto {
     id: string;
     nombre: string;
     sku: string;
@@ -8,7 +8,7 @@ export interface IProducto {
     precio: number;
     vendedor: string;
 }
-export interface IParams {
+interface IParams {
     nombre?: string;
     sku?: string;
     cantidad?: number;

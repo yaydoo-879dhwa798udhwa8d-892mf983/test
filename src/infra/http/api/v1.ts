@@ -32,10 +32,17 @@ import {accessProtected} from "../auth/index"
 first_router.get("/", accessProtected, omega); */
 
 import { vendedor_router } from "../../../modules/vendedores/infra/http/routes";
+
+import { admin_router } from "../../../modules/administradores/infra/http/routes";
+
+import { comprador_router } from "../../../modules/compradores/infra/http/routes";
+
 import Router from "koa-router";
 
 const first_router = new Router();
 
 first_router.use(vendedor_router.routes());
+first_router.use(admin_router.routes());
+first_router.use(comprador_router.routes());
 
 export { first_router };
