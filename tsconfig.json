@@ -9,7 +9,7 @@
     "outDir": "./build",
     "lib": ["es6"],
     "resolveJsonModule": true,
-    "types": ["node", "jest"],
+    "types": ["node", "jest", "koa-bodyparser", "koa-morgan", "koa-router", "dotenv", "uuid", "koa"],
     "typeRoots": ["./node_modules/@types", "./src/@types"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
