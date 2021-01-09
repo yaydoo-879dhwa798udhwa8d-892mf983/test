@@ -1,5 +1,5 @@
 import Router from "koa-router";
-import Koa from "Koa";
+import Koa from "koa";
 
 const comprador_router = new Router();
 

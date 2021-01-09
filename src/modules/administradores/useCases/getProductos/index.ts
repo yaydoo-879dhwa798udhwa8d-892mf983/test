@@ -1,4 +1,4 @@
-import Koa from "Koa"; /* 
+import Koa from "koa"; /* 
 import { ApiError } from "../../../../core/infra/auth/jtw/ApiError";
 import { NoHeadersError } from "../../../../core/infra/auth/jtw/ApiError"; */
 import knexInstance from "../../../../infra/knex";
