@@ -1,0 +1,66 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "API Rest Marketplace",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon",
+    "test": "jest --coverage --verbose",
+    "knex:migrate:latest": "knex --knexfile knexfile.ts migrate:latest",
+    "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback",
+    "knex:seed:run": "knex seed:run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yaydoo-879dhwa798udhwa8d-892mf983/test.git"
+  },
+  "keywords": [],
+  "author": "vg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yaydoo-879dhwa798udhwa8d-892mf983/test/issues"
+  },
+  "homepage": "https://github.com/yaydoo-879dhwa798udhwa8d-892mf983/test#readme",
+  "dependencies": {
+    "@types/faker": "^5.1.5",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/knex": "^0.16.1",
+    "babel-register": "^6.26.0",
+    "bcrypt-nodejs": "^0.0.3",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "faker": "^5.1.0",
+    "jest": "^26.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "knex-paginate": "^1.2.3",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-morgan": "^1.0.1",
+    "koa-respond": "^2.1.0",
+    "koa-router": "^10.0.0",
+    "nodemon": "^2.0.6",
+    "parse-database-url": "^0.3.0",
+    "pg": "^8.5.1",
+    "shallow-equal-object": "^1.1.1",
+    "sinon": "^9.2.2",
+    "ts-jest": "^26.4.4",
+    "ts-node": "^9.1.1",
+    "uuid": "^8.3.2",
+    "yup": "^0.32.8"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/jest": "^26.0.19",
+    "@types/koa": "^2.11.6",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-morgan": "^1.0.4",
+    "@types/koa-router": "^7.4.1",
+    "@types/node": "^14.14.19",
+    "@types/supertest": "^2.0.10",
+    "@types/uuid": "^8.3.0",
+    "supertest": "^6.0.1"
+  },
+  "jest": {
+    "verbose": true
+  }
+}
