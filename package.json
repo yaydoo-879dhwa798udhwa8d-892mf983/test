@@ -8,7 +8,9 @@
     "test": "jest --coverage --verbose",
     "knex:migrate:latest": "knex --knexfile knexfile.ts migrate:latest",
     "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback",
-    "knex:seed:run": "knex seed:run"
+    "knex:seed:run": "knex seed:run",
+    "pm2:depend":"./node_modules/.bin/pm2 install typescript",
+    "pm2": "./node_modules/.bin/pm2 start"
   },
   "repository": {
     "type": "git",
@@ -41,6 +43,7 @@
     "nodemon": "^2.0.6",
     "parse-database-url": "^0.3.0",
     "pg": "^8.5.1",
+    "pm2": "^4.5.1",
     "shallow-equal-object": "^1.1.1",
     "sinon": "^9.2.2",
     "ts-jest": "^26.4.4",
