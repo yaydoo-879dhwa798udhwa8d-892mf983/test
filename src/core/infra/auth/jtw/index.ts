@@ -8,7 +8,7 @@ import {
     BadTokenError,
     ApiError,
 } from "./ApiError";
-import Koa from "Koa";
+import Koa from "koa";
 
 export class JWT {
     private static readPublicKey(): Promise<string> {

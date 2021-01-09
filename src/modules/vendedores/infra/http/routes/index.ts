@@ -1,5 +1,5 @@
 import Router from "koa-router";
-import Koa from "Koa";
+import Koa from "koa";
 
 import { createUserController } from "../../../useCases/createVendedor";
 import { createProductoController } from "../../../useCases/createProducto/";
