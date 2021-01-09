@@ -1,4 +1,4 @@
-import { AggregateRoot } from "../../../../aggregateRoot";
+import { AggregateRoot } from "../../../../AggregateRoot";
 import { MockJobCreatedEvent } from "../events/mockJobCreatedEvent";
 import { UniqueEntityID } from "../../../../UniqueEntityID";
 import { MockJobDeletedEvent } from "../events/mockJobDeletedEvent";
